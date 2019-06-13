@@ -1,0 +1,9 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+<link rel="stylesheet" type="text/css" href="site.css">
+
+<form id="button" name="form" action="/uploadmultiple" enctype="multipart/form-data" method="post">
+    <input id="files" name="files" type="file" multiple onchange="fileupload('files');" />
+</form>
+<script src="~/js/myjsfile.js"></script>
