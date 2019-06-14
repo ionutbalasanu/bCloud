@@ -13652,11 +13652,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Ionut\\Licenta\\bCloud_v1\\bCloud_v1\\bCloud_v1.csproj",
+      "projectUniqueName": "D:\\Ionut\\Licenta\\GitHub\\bCloud\\bCloud_v1\\bCloud_v1.csproj",
       "projectName": "bCloud_v1",
-      "projectPath": "D:\\Ionut\\Licenta\\bCloud_v1\\bCloud_v1\\bCloud_v1.csproj",
+      "projectPath": "D:\\Ionut\\Licenta\\GitHub\\bCloud\\bCloud_v1\\bCloud_v1.csproj",
       "packagesPath": "C:\\Users\\Rafa\\.nuget\\packages\\",
-      "outputPath": "D:\\Ionut\\Licenta\\bCloud_v1\\bCloud_v1\\obj\\",
+      "outputPath": "D:\\Ionut\\Licenta\\GitHub\\bCloud\\bCloud_v1\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

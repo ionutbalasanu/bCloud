@@ -1,0 +1,37 @@
+﻿@{
+    ViewBag.Title = "Folder Explorer";
+}
+
+<h2>@Model.FolderName</h2>
+
+@if (Model.URL.ToLower() != "/explorer/")
+{
+    <a title="Parent" href="@Model.ParentFolderName">
+        <img src="~/images/up.png" alt="Up" style="width: 20px; height: 20px; border: none" />
+    </a>
+}
+
+<ul>
+    @*Listing the directories *@
+    @foreach (bCloud_v1.Models.DirModel dir in Model.DirModelList)
+    {
+        <li>
+            <img src="~/images/folder.png" alt="Folder Logo" align="top" style="width: 20px;
+                height: 20px; border: none" />
+            <a href="@(Model.URL + dir.DirName)/" title="@dir.DirName">@dir.DirName</a>
+            . . . . . . @dir.DirAccessed
+        </li>
+    }
+    @*Listing the files *@
+    @foreach (bCloud_v1.Models.FileModel file in Model.FileModelList)
+    {
+        <li>
+            <a href="@(Model.URL + file.FileName)"
+
+               title="@file.FileName" target="_blank">
+                @file.FileName
+            </a>. . . . . . @file.FileSizeText
+            . . . . . . @file.FileAccessed      
+        </li>
+    }
+</ul>

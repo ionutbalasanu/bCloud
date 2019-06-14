@@ -36,6 +36,17 @@
 #button {
     margin: auto;
     width: 60%;
-    border: 3px solid #73AD21;
+    //border: 1px outset #73AD21;
     padding: 10px;
+    background:content-box;
+    backface-visibility:inherit;
+    background-clip:initial;
+    background-color:aquamarine;
+}
+.upload_container {
+    display: flex;
+    align-items: center;
+    padding-top:300px;
+    padding-bottom:100px;
+
 }

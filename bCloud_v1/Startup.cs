@@ -11,6 +11,9 @@ using Microsoft.Extensions.DependencyInjection;
 using bCloud_v1.Data;
 using bCloud_v1.Models;
 using bCloud_v1.Services;
+using Microsoft.Extensions.FileProviders;
+using System.IO;
+using Microsoft.AspNetCore.Http;
 
 namespace bCloud_v1
 {
@@ -55,6 +58,22 @@ namespace bCloud_v1
             }
 
             app.UseStaticFiles();
+            //app.UseStaticFiles(new StaticFileOptions()
+            //{
+            //    FileProvider = new PhysicalFileProvider(
+            //Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot//upload")),
+            //    RequestPath = new PathString("/Files")
+            //});
+
+            //app.UseDirectoryBrowser(new DirectoryBrowserOptions()
+            //{
+            //    FileProvider = new PhysicalFileProvider(
+            //        Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot//upload")),
+            //    RequestPath = new PathString("/Files")
+            //});
+
+
+
 
             app.UseAuthentication();
 
@@ -63,7 +82,9 @@ namespace bCloud_v1
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
+                
             });
+
         }
 
 

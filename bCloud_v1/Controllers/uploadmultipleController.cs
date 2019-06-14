@@ -26,7 +26,7 @@ namespace bCloud_v1.Controllers
             {
                 string filename = ContentDispositionHeaderValue.Parse(item.ContentDisposition).FileName.Trim('"');
                 filename = this.EnsureFilename(filename);
-                using (FileStream filestream = System.IO.File.Create(this.Getpath(filename))) ;
+                using (FileStream filestream = System.IO.File.Create(this.Getpath(filename)));
             }
             return this.Content("Succes");
         }

@@ -10,3 +10,15 @@ D:\Ionut\Licenta\bCloud_v1\bCloud_v1\obj\Debug\netcoreapp2.0\UserSecretsAssembly
 D:\Ionut\Licenta\bCloud_v1\bCloud_v1\obj\Debug\netcoreapp2.0\bCloud_v1.dll
 D:\Ionut\Licenta\bCloud_v1\bCloud_v1\obj\Debug\netcoreapp2.0\bCloud_v1.pdb
 D:\Ionut\Licenta\bCloud_v1\bCloud_v1\obj\Debug\netcoreapp2.0\bCloud_v1.csprojAssemblyReference.cache
+D:\Ionut\Licenta\GitHub\bCloud\bCloud_v1\bin\Debug\netcoreapp2.0\bCloud_v1.deps.json
+D:\Ionut\Licenta\GitHub\bCloud\bCloud_v1\bin\Debug\netcoreapp2.0\bCloud_v1.runtimeconfig.json
+D:\Ionut\Licenta\GitHub\bCloud\bCloud_v1\bin\Debug\netcoreapp2.0\bCloud_v1.runtimeconfig.dev.json
+D:\Ionut\Licenta\GitHub\bCloud\bCloud_v1\bin\Debug\netcoreapp2.0\bCloud_v1.dll
+D:\Ionut\Licenta\GitHub\bCloud\bCloud_v1\bin\Debug\netcoreapp2.0\bCloud_v1.pdb
+D:\Ionut\Licenta\GitHub\bCloud\bCloud_v1\obj\Debug\netcoreapp2.0\bCloud_v1.csproj.CoreCompileInputs.cache
+D:\Ionut\Licenta\GitHub\bCloud\bCloud_v1\obj\Debug\netcoreapp2.0\UserSecretsAssemblyInfo.cs
+D:\Ionut\Licenta\GitHub\bCloud\bCloud_v1\obj\Debug\netcoreapp2.0\bCloud_v1.AssemblyInfoInputs.cache
+D:\Ionut\Licenta\GitHub\bCloud\bCloud_v1\obj\Debug\netcoreapp2.0\bCloud_v1.AssemblyInfo.cs
+D:\Ionut\Licenta\GitHub\bCloud\bCloud_v1\obj\Debug\netcoreapp2.0\bCloud_v1.dll
+D:\Ionut\Licenta\GitHub\bCloud\bCloud_v1\obj\Debug\netcoreapp2.0\bCloud_v1.pdb
+D:\Ionut\Licenta\GitHub\bCloud\bCloud_v1\obj\Debug\netcoreapp2.0\bCloud_v1.csprojAssemblyReference.cache
