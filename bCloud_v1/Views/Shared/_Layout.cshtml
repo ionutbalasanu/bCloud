@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - bCloud_v1</title>
+    <title>@ViewData["Title"] bCloud_v1</title>
 
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
@@ -33,7 +33,7 @@
                     <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
                     <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
                     <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
-                    <li><a asp-area="" asp-controller="Explorer" asp-action="Index">Explorer</a></li>
+                    <li><a asp-area="" asp-controller="uploadmultiple" asp-action="Files">Files</a></li>
                 </ul>
                 @await Html.PartialAsync("_LoginPartial")
             </div>
@@ -41,10 +41,10 @@
     </nav>
     <div class="container body-content">
         @RenderBody()
-        <hr />
+        @*<hr />
         <footer>
             <p>&copy; 2019 - bCloud_v1</p>
-        </footer>
+        </footer>*@
     </div>
 
     <environment include="Development">

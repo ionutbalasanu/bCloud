@@ -7,48 +7,126 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.FileProviders;
+using bCloud_v1.Models;
+using bCloud_v1.Models.Home;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNet.Identity;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using bCloud_v1.Models.AccountViewModels;
+using System.Security.Claims;
 
 namespace bCloud_v1.Controllers
 {
     public class uploadmultipleController : Controller
     {
-        private IHostingEnvironment _hostingEnvironment;
-        public uploadmultipleController(IHostingEnvironment hostingEnvironment)
+        private readonly IFileProvider fileProvider;
+        private readonly Microsoft.AspNetCore.Identity.UserManager<ApplicationUser> _userManager;
+
+
+        //class constructor
+       
+
+        public uploadmultipleController(IFileProvider fileProvider, Microsoft.AspNetCore.Identity.UserManager<ApplicationUser> userManager)
         {
-            _hostingEnvironment = hostingEnvironment;
+            this.fileProvider = fileProvider;
+            _userManager = userManager;
 
         }
         [HttpPost]
+  
 
-        public IActionResult Index(IList<IFormFile> files)
-        {   
-            foreach(IFormFile item in files)
+        [HttpPost]
+        public async Task<IActionResult> UploadFiles(List<IFormFile> files)
+        {
+            System.Security.Claims.ClaimsPrincipal currentUser = this.User;
+
+            var user = await _userManager.GetUserAsync(User);
+            var email = user.Email;
+            var dirName = $"Dir{email}";
+
+            if (files == null || files.Count == 0)
+                return Content("files not selected");
+            
+            foreach (var file in files)
             {
-                string filename = ContentDispositionHeaderValue.Parse(item.ContentDisposition).FileName.Trim('"');
-                filename = this.EnsureFilename(filename);
-                using (FileStream filestream = System.IO.File.Create(this.Getpath(filename)));
+                var path = Path.Combine(
+                        Directory.GetCurrentDirectory(), $"wwwroot/upload/{dirName}/",
+                        file.GetFilename());
+
+                using (var stream = new FileStream(path, FileMode.Create))
+                {
+                    await file.CopyToAsync(stream);
+                }
             }
-            return this.Content("Succes");
+
+            return RedirectToAction("Files");
+           
         }
 
-        private string Getpath(string filename)
+
+        public IActionResult Files()
         {
-            // throw new NotImplementedException();
-            string path = _hostingEnvironment.WebRootPath + "\\upload\\";
-            if(!Directory.Exists(path))
+
+            
+            var model = new FilesViewModel();
+
+            foreach (var item in this.fileProvider.GetDirectoryContents(""))
             {
-                Directory.CreateDirectory(path);
+                model.Files.Add(
+                    new FileDetails { Name = item.Name, Path = item.PhysicalPath });
             }
-            return path + filename;
+            return View(model);
         }
 
-        private string EnsureFilename(string filename)
+        public async Task<IActionResult> Download(string filename)
         {
-            // throw new NotImplementedException();
-            if (filename.Contains("\\"))
+            System.Security.Claims.ClaimsPrincipal currentUser = this.User;
+
+            var user = await _userManager.GetUserAsync(User);
+            var email = user.Email;
+            var dirName = $"Dir{email}";
+            if (filename == null)
+                return Content("filename not present");
+
+            var path = Path.Combine(
+                           Directory.GetCurrentDirectory(),
+                           $"wwwroot/upload/{dirName}/", filename);
+
+            var memory = new MemoryStream();
+            using (var stream = new FileStream(path, FileMode.Open))
             {
-                filename = filename.Substring(filename.LastIndexOf("\\") + 1);
+                await stream.CopyToAsync(memory);
             }
-                return filename;        }
+            memory.Position = 0;
+            return File(memory, GetContentType(path), Path.GetFileName(path));
+        }
+
+        private string GetContentType(string path)
+        {
+            var types = GetMimeTypes();
+            var ext = Path.GetExtension(path).ToLowerInvariant();
+            return types[ext];
+        }
+
+        private Dictionary<string, string> GetMimeTypes()
+        {
+            return new Dictionary<string, string>
+            {
+                {".txt", "text/plain"},
+                {".pdf", "application/pdf"},
+                {".doc", "application/vnd.ms-word"},
+                {".docx", "application/vnd.ms-word"},
+                {".xls", "application/vnd.ms-excel"},
+                {".xlsx", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"},
+                {".png", "image/png"},
+                {".jpg", "image/jpeg"},
+                {".jpeg", "image/jpeg"},
+                {".gif", "image/gif"},
+                {".csv", "text/csv"}
+            };
+        }
+   
     }
 }

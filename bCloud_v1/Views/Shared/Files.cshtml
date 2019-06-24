@@ -1,0 +1,15 @@
+﻿@model bCloud_v1.Models.Home.FilesViewModel;
+
+
+<center><h1>My files</h1></center>
+<ul>
+    @foreach (var item in Model.Files)
+    {
+        <li>
+            <a asp-action="Download"
+               asp-route-filename="@item.Name">
+                @item.Name
+            </a>
+        </li>
+    }
+</ul>

@@ -13,6 +13,7 @@ using Microsoft.Extensions.Options;
 using bCloud_v1.Models;
 using bCloud_v1.Models.AccountViewModels;
 using bCloud_v1.Services;
+using System.IO;
 
 namespace bCloud_v1.Controllers
 {
@@ -221,9 +222,12 @@ namespace bCloud_v1.Controllers
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+           
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    DirectoryInfo di = new DirectoryInfo("wwwroot/upload/" );
+                    di.CreateSubdirectory($"Dir{user}");
                     _logger.LogInformation("User created a new account with password.");
 
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
@@ -232,7 +236,9 @@ namespace bCloud_v1.Controllers
 
                     await _signInManager.SignInAsync(user, isPersistent: false);
                     _logger.LogInformation("User created a new account with password.");
+
                     return RedirectToLocal(returnUrl);
+
                 }
                 AddErrors(result);
             }
@@ -458,7 +464,14 @@ namespace bCloud_v1.Controllers
                 return RedirectToAction(nameof(HomeController.Index), "Home");
             }
         }
+        [HttpGet]
+        public async Task<string> GetCurrentUserId()
+        {
+            ApplicationUser usr = await GetCurrentUserAsync();
+            return usr?.Id;
+        }
 
+        private Task<ApplicationUser> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
         #endregion
     }
 }
