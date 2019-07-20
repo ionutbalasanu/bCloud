@@ -68,11 +68,12 @@ namespace bCloud_v1.Controllers
 
         public IActionResult Files()
         {
+            System.Security.Claims.ClaimsPrincipal currentUser = this.User;
 
-            
+
             var model = new FilesViewModel();
 
-            foreach (var item in this.fileProvider.GetDirectoryContents(""))
+            foreach (var item in this.fileProvider.GetDirectoryContents($"/Dir{currentUser.Identity.Name}"))
             {
                 model.Files.Add(
                     new FileDetails { Name = item.Name, Path = item.PhysicalPath });
